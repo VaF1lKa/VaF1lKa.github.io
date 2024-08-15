@@ -1,0 +1,63 @@
+body {
+    background-color: #141414;
+    color: greenyellow;
+    font-family: 'Comic Sans MS'; 
+}
+
+.zoneMain {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    padding: 80px;
+    padding-top: 195px;
+}
+
+
+.zoneKategories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.kategory {
+    background-color: #a91010;
+    border-radius: 45px;
+    min-height: 267px;
+    min-width: 267px;
+    margin-top: 60px;
+    margin-right: 30px;
+    margin-left: 30px;
+
+    text-align: center;
+    font-size: 50px;
+}
+
+
+.zoneStorages {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.storage {
+    background-color: #149714;
+    border-radius: 45px;
+    min-height: 267px;
+    min-width: 267px;
+    margin-top: 60px;
+    margin-right: 30px;
+    margin-left: 30px;
+
+    text-align: center;
+    font-size: 50px;
+}
+
+
+.zoneIncome {
+    background-color: #1c84cc;
+    border-radius: 45px;
+    min-height: 267px;
+    min-width: 267px;
+    margin-top: 60px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
