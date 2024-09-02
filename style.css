@@ -1,14 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+
+
 body {
     background-color: #141414;
-    color: greenyellow;
-    font-family: 'Comic Sans MS'; 
+    color: #d1d1d1;
+    font-family: 'Comfortaa';
     height: 100%;
     max-height: 100vh;
     overflow: hidden;
-
 }
 
-.zoneMain {
+p {
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    font-size: 2vh;
+}
+
+svg {
+    height: 4.5vh;
+}
+
+.Main {
     display: flex;
     align-content: center;
     flex-direction: column;
@@ -17,7 +30,7 @@ body {
 }
 
 
-.zoneKategories {
+.Kategories {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -27,16 +40,18 @@ body {
     border-radius: 15px;
     min-height: 15vh;
     min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
     margin-top: 20px;
     margin-right: 10px;
     margin-left: 10px;
 
     text-align: center;
-    font-size: 50px;
+    align-content: center;
 }
 
 
-.zoneStorages {
+.Storages {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -46,21 +61,34 @@ body {
     border-radius: 15px;
     min-height: 15vh;
     min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
     margin-top: 20px;
     margin-right: 10px;
     margin-left: 10px;
 
-    text-align: center;
-    font-size: 50px;
+    text-align: center; 
+    align-content: center;
 }
 
 
-.zoneIncome {
+.Income {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.plus {
     background-color: #1c84cc;
     border-radius: 15px;
     min-height: 15vh;
     min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
     margin-top: 20px;
     margin-right: 10px;
     margin-left: 10px;
+    text-align: center;
+    align-content: center;
 }
+
+
