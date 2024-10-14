@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+body {
+    background-color: #141414;
+    color: white;
+    font-family: 'Comfortaa';
+    height: 100%;
+    max-height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap-reverse; 
+    margin: 50px;
+}
+
+p {
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    font-size: 1.7vh;
+}
+
+svg {
+    height: 4.5vh;
+}
+
+
+.Kategories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.kategory {
+    background-color: #a91010;
+    border-radius: 15px;
+    min-height: 15vh;
+    min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    text-align: center;
+    align-content: center;
+}
+
+
+.Storages {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.storage {
+    background-color: #149714;
+    border-radius: 15px;
+    min-height: 15vh;
+    min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    text-align: center; 
+    align-content: center;
+}
+
+
+.Income {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.plus {
+    background-color: #1c84cc;
+    border-radius: 15px;
+    min-height: 15vh;
+    min-width: 29vw;
+    max-height: 15vh;
+    max-width: 29vw;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+    align-content: center;
+}
+
+
