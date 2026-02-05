@@ -2,7 +2,7 @@ let galleryData = [];
 
 async function initGallery() {
     try {
-        const response = await fetch('./assets/imgs/_imageNamesList.json');
+        const response = await fetch('assets/imgs/_imageNamesList.json');
         
         // Теперь 'data' — это СРАЗУ массив строк, который ты прислал выше
         const data = await response.json();
@@ -22,8 +22,8 @@ function startApp() {
 
     items.forEach(name => {
         const anchor = $(`
-            <a href="./assets/imgs/${name}" class="gallery-item">
-                <img src="./assets/imgs/${name}" alt="" />
+            <a href="assets/imgs/${name}" class="gallery-item">
+                <img src="assets/imgs/${name}" alt="" />
             </a>
         `);
         grid.append(anchor);
