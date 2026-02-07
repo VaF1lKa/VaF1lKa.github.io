@@ -34,21 +34,21 @@ html, body {
 .intro span {
     font-family: "Inter"; 
     font-size: 1.2rem;
-    color: #f0e008;
+    color: #fd8496;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
 #nejno {
-    color: #ec177a4d;
+    color: #fdbcdf;
 }
 
 .arrow {
     width: 30px;
     height: 30px;
-    border-left: 2px solid #000;
-    border-top: 2px solid #000;
+    border-left: 2px solid #d89402;
+    border-top: 2px solid #fd8496;
     transform: rotate(45deg);
     animation: bounce 2s infinite;
 }
