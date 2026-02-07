@@ -34,29 +34,51 @@ function startApp() {
         margins: 5,
         lastRow: 'hide',
     }).on('jg.complete', function () {
-
         
         gsap.registerPlugin(ScrollTrigger);
 
         const images = gsap.utils.toArray("#grid a").reverse();
         let currentIndex = -1;
         let currentYOffset = 0;
+        let isHeartMode = false; // Состояние "упаковки" в сердечко
+        
+        // Используем тег img для подключения внешнего SVG
+        const heartImg = document.createElement('img');
+        const heartContainer = document.getElementById('heart-container');
 
         ScrollTrigger.observe({
             target: window,
             type: "wheel,touch,pointer",
             tolerance: 60, 
             onUp: () => { 
+                if (isHeartMode) return;
+
                 document.querySelector('.intro').classList.add('hidden');
-                if (currentIndex >= images.length - 1) return;
+                if (currentIndex >= images.length - 1) {
+                    isHeartMode = true;
+                    packIntoHeart();
+                    return;
+                }
 
                 currentIndex++;
                 const target = images[currentIndex];
 
                 // 1. Появление картинки
-                gsap.fromTo(target, 
-                    { opacity: 0, y: -400, scale: 0.9 }, 
-                    { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power2.out" }
+                gsap.fromTo(target, { 
+                        opacity: 0, 
+                        x: (i) => (Math.random() - 0.5) * 200,
+                        rotation: () => (Math.random() - 0.5) * 45,
+                        y: -400, 
+                        scale: 0.9 
+                    }, 
+                    {
+                        opacity: 1, 
+                        x: 0,
+                        y: 0, 
+                        rotation: 0, 
+                        scale: 1, 
+                        duration: 0.3, 
+                        ease: "power2.out" }
                 );
 
                 // 2. Умный подъем сетки
@@ -78,6 +100,12 @@ function startApp() {
                 }
             },
             onDown: () => {
+                // Если мы в режиме сердечка — сначала "распаковываем" его
+                if (isHeartMode) {
+                    unpackFromHeart();
+                    return;
+                }
+
                 if (currentIndex < 0) return;
 
                 const target = images[currentIndex];
@@ -85,7 +113,9 @@ function startApp() {
                 // 1. Исчезновение текущей картинки
                 gsap.to(target, {
                     opacity: 0, 
-                    y: -150, 
+                    x: (i) => (Math.random() - 0.5) * 200,
+                    y: (i) => (Math.random() - 0.5) * 200 - (window.innerHeight / 2), 
+                    rotation: () => (Math.random() - 0.5) * 45,
                     scale: 0.9, 
                     duration: 0.5,
                     ease: "power2.in"
@@ -111,6 +141,82 @@ function startApp() {
                 }
             }
         });
+
+        // Функция упаковки в сердечко
+        function packIntoHeart() {
+            const tl = gsap.timeline();
+            const visibleImages = images.filter(img => gsap.getProperty(img, "opacity") > 0);
+            
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            // 1. Анимация схлопывания карточек точно в центр экрана
+            tl.to(visibleImages, {
+                x: (i, target) => {
+                    const rect = target.getBoundingClientRect();
+                    return centerX - (rect.left + rect.width / 2);
+                },
+                y: (i, target) => {
+                    const rect = target.getBoundingClientRect();
+                    return centerY - (rect.top + rect.height / 2);
+                },
+                scale: 0,
+                rotation: () => (Math.random() - 0.5) * 90,
+                duration: 0.8,
+                stagger: {
+                    amount: 0.4,
+                    from: "center"
+                },
+                ease: "power3.in"
+            });
+
+            // 2. Появление сердечка
+            tl.to(heartContainer, {
+                scale: 1,
+                opacity: 1,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.5)"
+            }, "-=0.2");
+
+            // 3. Пульсация
+            tl.to(heartContainer, {
+                scale: 1.15,
+                duration: 0.6,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        }
+
+        function unpackFromHeart() {
+            isHeartMode = false;
+            gsap.killTweensOf(heartContainer);
+            
+            const tl = gsap.timeline();
+
+            tl.to(heartContainer, {
+                scale: 0,
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.in"
+            });
+
+            // Возвращаем карточки на места каскадом
+            const visibleImages = images.slice(0, currentIndex + 1);
+            tl.to(visibleImages, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                rotation: 0,
+                duration: 0.7,
+                stagger: {
+                    amount: 0.3,
+                    from: "end"
+                },
+                ease: "back.out(1.2)"
+            }, "-=0.1");
+        }
     });
 }
 

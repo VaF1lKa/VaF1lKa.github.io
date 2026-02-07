@@ -47,7 +47,7 @@ html, body {
 .arrow {
     width: 30px;
     height: 30px;
-    border-left: 2px solid #d89402;
+    border-left: 2px solid #fd8496;
     border-top: 2px solid #fd8496;
     transform: rotate(45deg);
     animation: bounce 2s infinite;
@@ -83,4 +83,26 @@ html, body {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+/* Контейнер для сердечка */
+#heart-container {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 30px rgb(255, 255, 255));
+}
+
+#heart-container svg {
+    /* Цвет заливки теперь принудительно красит все пути внутри */
+    fill: #8bbfff;
+    width: 350px;
+    height: 350px;
+}
+
+#heart-container svg path {
+    fill: inherit; /* Чтобы пути брали цвет из родительского svg */
 }
