@@ -8,7 +8,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden; /* Оставляем скролл заблокированным */
-    background-color: #fabed14d;
+    background-color: #fddaed;
     user-select: none; 
 }
 
@@ -34,14 +34,14 @@ html, body {
 .intro span {
     font-family: "Inter"; 
     font-size: 1.2rem;
-    color: #242424;
+    color: #f0e008;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
-.nejno {
-    color: #ffffff;
+#nejno {
+    color: #ec177a4d;
 }
 
 .arrow {

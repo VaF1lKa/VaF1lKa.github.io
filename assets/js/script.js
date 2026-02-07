@@ -45,6 +45,7 @@ function startApp() {
         ScrollTrigger.observe({
             target: window,
             type: "wheel,touch,pointer",
+            tolerance: 60, 
             onUp: () => { 
                 document.querySelector('.intro').classList.add('hidden');
                 if (currentIndex >= images.length - 1) return;
