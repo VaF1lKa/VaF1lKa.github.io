@@ -38,13 +38,15 @@ function startApp() {
         gsap.registerPlugin(ScrollTrigger);
 
         const images = gsap.utils.toArray("#grid a").reverse();
+        // Используем тег img для подключения внешнего SVG
+        const heartImg = document.createElement('img');//////////////////////////////////////////////////////////////////////
+        const heartContainer = document.getElementById('heart-container');
+        const vignette = document.getElementById('vignette');
+        const decorHearts = document.getElementById('decoration-hearts');
+        
         let currentIndex = -1;
         let currentYOffset = 0;
         let isHeartMode = false; // Состояние "упаковки" в сердечко
-        
-        // Используем тег img для подключения внешнего SVG
-        const heartImg = document.createElement('img');
-        const heartContainer = document.getElementById('heart-container');
 
         ScrollTrigger.observe({
             target: window,
@@ -170,6 +172,11 @@ function startApp() {
                 ease: "power3.in"
             });
 
+            tl.to([vignette, decorHearts], { 
+                opacity: 1, 
+                duration: 1.5 
+            }, "-=0.5"); // Виньетка плавно проявляется
+
             // 2. Появление сердечка
             tl.to(heartContainer, {
                 scale: 1,
@@ -200,6 +207,11 @@ function startApp() {
                 duration: 0.4,
                 ease: "power2.in"
             });
+
+            tl.to([vignette, decorHearts], { 
+                opacity: 0, 
+                duration: 1.5 
+            }, "-=0.5"); // Виньетка плавно ghjgflftn
 
             // Возвращаем карточки на места каскадом
             const visibleImages = images.slice(0, currentIndex + 1);

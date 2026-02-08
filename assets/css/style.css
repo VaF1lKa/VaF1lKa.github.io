@@ -27,7 +27,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1; /* Фон всегда сзади */
+    z-index: 0;/* Фон всегда сзади */
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -85,6 +85,19 @@ html, body {
     height: 100%;
 }
 
+/* БЕЛАЯ ВИНЬЕТКА */
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 150px 100px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0; /* Изначально скрыта */
+}
+
 /* Контейнер для сердечка */
 #heart-container {
     position: fixed;
@@ -106,3 +119,69 @@ html, body {
 #heart-container svg path {
     fill: inherit; /* Чтобы пути брали цвет из родительского svg */
 }
+
+/* Общий слой декора */
+#decoration-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 40; 
+    opacity: 0; /* Проявляется через JS */
+}
+
+/* Базовый класс для всех картинок-сердечек */
+.group img {
+    position: absolute;
+    height: auto;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    opacity: 0.9;
+}
+
+/* Адаптивные размеры по типам (используем vw для масштабируемости) */
+.type-outline { width: 8vw;  min-width: 60px;  max-width: 120px; }
+.type-fancy   { width: 20vw; min-width: 100px; max-width: 250px; }
+.type-bold    { width: 10vw; min-width: 80px;  max-width: 300px; }
+.type-triple  { width: 14vw; min-width: 120px; max-width: 320px; }
+.type-swirl   { width: 20vw; min-width: 90px;  max-width: 260px; }
+.type-solid   { width: 11vw;  min-width: 50px;  max-width: 190px; }
+
+/* Группировка по углам */
+.group {
+    position: absolute;
+    width: 35vw;
+    height: 35vw;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.group-tl { top: 0; left: 0; }
+.group-tr { top: 0; right: 0; }
+.group-dl { bottom: 5%; left: 0; }
+.group-dr { bottom: 5%; right: 0; }
+
+/* Внутреннее распределение: теперь они "растут" из углов более плотно */
+
+/* Верхний левый угол */
+.group-tl .h1 { top: 15%; left: 30%; transform: rotate(-10deg);}
+.group-tl .h2 { top: 5%; left: 60%; transform: rotate(15deg);}
+.group-tl .h3 { top: 40%; left: 13%; transform: rotate(15deg)  scale(1.2);}
+
+/* Верхний правый угол */
+.group-tr .h1 { top: 15%; right: 70%; transform: rotate(10deg) scale(1.3);}
+.group-tr .h2 { top: 20%; right: 15%; transform: rotate(-20deg) scaleX(-1);}
+
+/* Нижний правый угол - самый пышный букет */
+.group-dr .h1 { bottom: 35%; right: 20%; transform: rotate(5deg);}
+.group-dr .h2 { bottom: 60%; right: 10%; transform: rotate(-15deg);}
+.group-dr .h3 { bottom: 25%; right: 40%; transform: rotate(-10deg);}
+.group-dr .h4 { bottom: 5%; right: 15%; transform: rotate(-10deg);}
+.group-dr .h5 { bottom: 5%; right: 65%; transform: rotate(-35deg) scale(1.3);}
+
+/* Нижний левый угол */
+.group-dl .h1 { bottom: 5%; left: 15%; transform: rotate(15deg) scale(1.3);}
+.group-dl .h2 { bottom: 40%; left: 12%; transform: rotate(10deg) scale(1.3);}
+.group-dl .h3 { bottom: -15%; left: 40%; transform: rotate(-5deg) scaleX(-1);}
+.group-dl .h4 { bottom: -15%; left: 70%; transform: rotate(5deg);}
