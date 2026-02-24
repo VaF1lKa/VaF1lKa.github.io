@@ -22,8 +22,8 @@ function startApp() {
 
     items.forEach(name => {
         const anchor = $(`
-            <a href="./assets/imgs/${name}" class="gallery-item">
-                <img src="./assets/imgs/${name}" alt="" />
+            <a href="./assets/imgs/${name}" class="gallery-item" draggable="false">
+                <img src="./assets/imgs/${name}" alt="" draggable="false"/>
             </a>
         `);
         grid.append(anchor);
@@ -38,8 +38,6 @@ function startApp() {
         gsap.registerPlugin(ScrollTrigger);
 
         const images = gsap.utils.toArray("#grid a").reverse();
-        // Используем тег img для подключения внешнего SVG
-        const heartImg = document.createElement('img');//////////////////////////////////////////////////////////////////////
         const heartContainer = document.getElementById('heart-container');
         const vignette = document.getElementById('vignette');
         const decorHearts = document.getElementById('decoration-hearts');
@@ -47,12 +45,14 @@ function startApp() {
         let currentIndex = -1;
         let currentYOffset = 0;
         let isHeartMode = false; // Состояние "упаковки" в сердечко
+        let isAnimating = false;
 
         ScrollTrigger.observe({
             target: window,
             type: "wheel,touch,pointer",
             tolerance: 60, 
             onUp: () => { 
+                if (isAnimating) return;
                 if (isHeartMode) return;
 
                 document.querySelector('.intro').classList.add('hidden');
@@ -103,11 +103,11 @@ function startApp() {
             },
             onDown: () => {
                 // Если мы в режиме сердечка — сначала "распаковываем" его
+                if (isAnimating){}
                 if (isHeartMode) {
                     unpackFromHeart();
                     return;
                 }
-
                 if (currentIndex < 0) return;
 
                 const target = images[currentIndex];
@@ -143,12 +143,12 @@ function startApp() {
                 }
             }
         });
-
+        
         // Функция упаковки в сердечко
         function packIntoHeart() {
             const tl = gsap.timeline();
             const visibleImages = images.filter(img => gsap.getProperty(img, "opacity") > 0);
-            
+
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
 
@@ -193,6 +193,8 @@ function startApp() {
                 yoyo: true,
                 ease: "sine.inOut"
             });
+            
+            
         }
 
         function unpackFromHeart() {
